@@ -1,0 +1,59 @@
+/* Plain CSS for the shared components. Colors come from these variables only. */
+:root {
+  --c-bg: #faf7f2;
+  --c-surface: #ffffff;
+  --c-text: #1c1917;
+  --c-muted: #57534e;
+  --c-border: #d6d3d1;
+  --c-primary: #c2410c;
+  --c-primary-hover: #9a3412;
+  --c-on-primary: #ffffff;
+  --c-danger: #b91c1c;
+  --c-danger-hover: #991b1b;
+  --c-focus: #1d4ed8;
+  --space: 4px;
+  --radius: 10px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--c-bg); color: var(--c-text); font-family: system-ui, sans-serif; }
+:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+
+.skip-link { position: absolute; left: 8px; top: -100px; background: var(--c-surface); color: var(--c-text); padding: 12px 16px; border-radius: var(--radius); z-index: 100; }
+.skip-link:focus { top: 8px; }
+.page { max-width: 960px; margin: 0 auto; padding: calc(var(--space) * 6) calc(var(--space) * 4); }
+.page main:focus { outline: none; }
+
+.stack { display: flex; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; border-radius: var(--radius); border: 1px solid transparent; cursor: pointer; }
+.btn--primary { background: var(--c-primary); color: var(--c-on-primary); }
+.btn--primary:hover:not(:disabled) { background: var(--c-primary-hover); }
+.btn--secondary { background: var(--c-surface); color: var(--c-text); border-color: var(--c-border); }
+.btn--danger { background: var(--c-danger); color: var(--c-on-primary); }
+.btn--danger:hover:not(:disabled) { background: var(--c-danger-hover); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn__spinner { width: 1em; height: 1em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.input-field { display: flex; flex-direction: column; gap: 4px; }
+.input-field label { font-weight: 600; }
+.input-field input { min-height: 44px; padding: 0 12px; font: inherit; border: 1px solid var(--c-border); border-radius: var(--radius); background: var(--c-surface); color: var(--c-text); }
+.input-field--invalid input { border-color: var(--c-danger); }
+.input-field .hint { margin: 0; color: var(--c-muted); font-size: 0.875rem; }
+.input-field .error { margin: 0; color: var(--c-danger); font-size: 0.875rem; }
+
+.card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--radius); display: flex; flex-direction: column; }
+.card__header { padding: 16px 16px 0; }
+.card__body { padding: 12px 16px; flex: 1; }
+.card__footer { padding: 0 16px 16px; }
+
+.modal { border: 1px solid var(--c-border); border-radius: var(--radius); padding: 0; background: var(--c-surface); color: var(--c-text); max-width: min(32rem, calc(100vw - 32px)); width: 100%; }
+.modal::backdrop { background: rgb(0 0 0 / 0.5); }
+.modal__inner { padding: 20px; }
+.modal h2 { margin-top: 0; }
+
+.board-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid currentColor; }
+.badge--preparing { color: #92400e; }
+.badge--ready { color: #166534; }
+.muted { color: var(--c-muted); }
+.alert { color: var(--c-danger); margin: 0; }

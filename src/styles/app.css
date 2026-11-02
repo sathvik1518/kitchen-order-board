@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/* "dark:" means "inside an element with the dark class", so a toggle can control it. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Remove Tailwind's built-in colour palette, so only our tokens exist.
+   bg-red-500 or text-white now produce nothing, which keeps colours honest. */
+@theme {
+  --color-*: initial;
+}
+
+/* Light theme values. This file is the only place colour values live. */
+:root {
+  color-scheme: light;
+  --surface: oklch(1 0 0);
+  --surface-muted: oklch(0.97 0.005 250);
+  --text: oklch(0.21 0.02 260);
+  --text-muted: oklch(0.45 0.02 260);
+  --brand: oklch(0.55 0.2 260);
+  --brand-hover: oklch(0.48 0.2 260);
+  --brand-foreground: oklch(1 0 0);
+  --danger: oklch(0.55 0.22 27);
+  --danger-hover: oklch(0.48 0.2 27);
+  --danger-foreground: oklch(1 0 0);
+  --success: oklch(0.5 0.14 150);
+  --success-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.01 260);
+  --overlay: oklch(0 0 0 / 0.5);
+}
+
+/* Dark theme: the same names with different values. */
+.dark {
+  color-scheme: dark;
+  --surface: oklch(0.18 0.02 260);
+  --surface-muted: oklch(0.24 0.02 260);
+  --text: oklch(0.96 0.005 260);
+  --text-muted: oklch(0.72 0.02 260);
+  --brand: oklch(0.68 0.16 260);
+  --brand-hover: oklch(0.74 0.15 260);
+  --brand-foreground: oklch(0.15 0.02 260);
+  --danger: oklch(0.68 0.19 27);
+  --danger-hover: oklch(0.74 0.17 27);
+  --danger-foreground: oklch(0.15 0.02 260);
+  --success: oklch(0.72 0.16 150);
+  --success-foreground: oklch(0.15 0.02 260);
+  --border: oklch(0.32 0.02 260);
+  --overlay: oklch(0 0 0 / 0.7);
+}
+
+/* "inline" makes bg-surface read var(--surface) directly, so it follows the .dark override. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-overlay: var(--overlay);
+}
+
+/* Paint the page itself from the tokens, so the area outside components switches theme too. */
+@layer base {
+  body {
+    background-color: var(--surface);
+    color: var(--text);
+  }
+}
